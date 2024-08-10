@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>France LIDAR Tiles</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
+    <script src="https://unpkg.com/flatgeobuf@3.32.0/dist/flatgeobuf-geojson.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
+      }
+      iframe {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        left: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <iframe
+      src="https://copc.io/"
+      title="COPC Viewer"
+      id="iframe"
+    ></iframe>
+    <script>
+      mapboxgl.accessToken = "pk.eyJ1IjoiYmVydHQiLCJhIjoiaWFvN1Z4USJ9.k04Q6CVms4Gx7KDZxvAx2A";
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/satellite-streets-v11",
+        zoom: 14,
+        center: [1.282928,44.110523],
+        projection: "globe",
+      });
+
+      map.on("load", async () => {
+        map.setFog({});
+        map.addSource("footprints", {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: [],
+          },
+        });
+        RefreshTiles();
+
+        map.addLayer({
+          id: "footprints",
+          type: "fill",
+          source: "footprints",
+          layout: {},
+          paint: {
+            "fill-color": "#0080ff",
+            "fill-opacity": 0.5,
+          },
+        });
+        map.on("click", "footprints", (e) => {
+            let href = e.features[0].properties.url;
+            let el = document.getElementById("iframe");
+            el.src = `https://diffusion-lidarhd.ign.fr/visionneuse?copc=${href}`;
+        });
+        map.on("moveend", async () => {
+            RefreshTiles();
+            });
+      });
+
+      var tiles_gdb = "https://flatgeobuf.blob.core.windows.net/fgb/france_lidar_tiles.fgb";
+
+      async function RefreshTiles(){
+        let bnds = map.getBounds();
+        let bbox = [
+          bnds._sw.lng,
+          bnds._sw.lat,
+          bnds._ne.lng,
+          bnds._ne.lat,
+        ];
+          let result = {
+              type: "FeatureCollection",
+              features: [],
+          };
+
+        for await (let feature of flatgeobuf.deserialize(tiles_gdb, {minX: bbox[0] ,maxX: bbox[2] ,minY: bbox[1] ,maxY: bbox[3]})) {
+          result.features.push(feature);
+        }
+        let src = map.getSource("footprints");
+        src.setData(result);
+
+     }
+    </script>
+  </body>
+</html>
