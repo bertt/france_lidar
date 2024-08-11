@@ -1,0 +1,202 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "stac_version": "1.0.0",
+      "stac_extensions": [
+        "https://stac-extensions.github.io/pointcloud/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/projection/v1.1.0/schema.json"
+      ],
+      "id": "LHD_FXX_0659_6410_PTS_C_LAMB93_IGN69.copc",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              2.481732713730641,
+              44.7789335470523,
+              639.38
+            ],
+            [
+              2.481649735919816,
+              44.787936402151814,
+              639.38
+            ],
+            [
+              2.494291948840335,
+              44.78799478176734,
+              762.48
+            ],
+            [
+              2.49437290299042,
+              44.77899191714215,
+              762.48
+            ],
+            [
+              2.481732713730641,
+              44.7789335470523,
+              639.38
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "bbox": [
+        2.481649735919816,
+        44.7789335470523,
+        639.38,
+        2.49437290299042,
+        44.78799478176734,
+        762.48
+      ],
+      "properties": {
+        "datetime": "2023-07-29T00:00:00Z",
+        "pc:count": 40598265,
+        "pc:encoding": "?",
+        "pc:schemas": [
+          {
+            "name": "X",
+            "size": 8,
+            "type": "floating"
+          },
+          {
+            "name": "Y",
+            "size": 8,
+            "type": "floating"
+          },
+          {
+            "name": "Z",
+            "size": 8,
+            "type": "floating"
+          },
+          {
+            "name": "Intensity",
+            "size": 2,
+            "type": "unsigned"
+          },
+          {
+            "name": "ReturnNumber",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "NumberOfReturns",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "ScanDirectionFlag",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "EdgeOfFlightLine",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "Classification",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "Synthetic",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "KeyPoint",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "Withheld",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "Overlap",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "ScanAngleRank",
+            "size": 4,
+            "type": "floating"
+          },
+          {
+            "name": "UserData",
+            "size": 1,
+            "type": "unsigned"
+          },
+          {
+            "name": "PointSourceId",
+            "size": 2,
+            "type": "unsigned"
+          },
+          {
+            "name": "GpsTime",
+            "size": 8,
+            "type": "floating"
+          },
+          {
+            "name": "ScanChannel",
+            "size": 1,
+            "type": "unsigned"
+          }
+        ],
+        "pc:type": "lidar",
+        "proj:bbox": [
+          659000.0,
+          6409000.0,
+          639.38,
+          659999.99,
+          6409999.99,
+          762.48
+        ],
+        "proj:geometry": {
+          "coordinates": [
+            [
+              [
+                659000.0,
+                6409000.0,
+                639.38
+              ],
+              [
+                659000.0,
+                6409999.99,
+                639.38
+              ],
+              [
+                659999.99,
+                6409999.99,
+                762.48
+              ],
+              [
+                659999.99,
+                6409000.0,
+                762.48
+              ],
+              [
+                659000.0,
+                6409000.0,
+                639.38
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "proj:wkt2": "PROJCS[\"RGF93 v1 / Lambert-93\",GEOGCS[\"RGF93 v1\",DATUM[\"Reseau_Geodesique_Francais_1993_v1\",SPHEROID[\"GRS 1980\",6378137,298.257222101,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6171\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4171\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",46.5],PARAMETER[\"central_meridian\",3],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",44],PARAMETER[\"false_easting\",700000],PARAMETER[\"false_northing\",6600000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"2154\"]]"
+      },
+      "links": [],
+      "assets": {
+        "data": {
+          "href": "http://localhost:2015/LHD_FXX_0659_6410_PTS_C_LAMB93_IGN69.copc.laz",
+          "roles": [
+            "data"
+          ]
+        }
+      }
+    }
+  ]
+}

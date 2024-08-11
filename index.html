@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <title>France LIDAR Tiles</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css"
       rel="stylesheet"
@@ -83,6 +83,7 @@
       });
 
       var tiles_gdb = "https://flatgeobuf.blob.core.windows.net/fgb/france_lidar_tiles.fgb";
+      // for local use: var tiles_gdb = "france_lidar_tiles.fgb";
 
       async function RefreshTiles(){
         let bnds = map.getBounds();
