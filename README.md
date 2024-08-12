@@ -34,6 +34,12 @@ chmod +x process_footprints.sh
 ./process_footprints.sh
 ```
 
+Sample GDAL query on flatgeobuf:
+
+```shell
+ogrinfo /vsicurl/https://bertt.github.io/france_lidar_catalog/france_lidar_tiles.fgb -sql "SELECT url FROM france_lidar_tiles limit 10"
+```
+
 ## Viewer
 
 Viewer index.html has two parts:
