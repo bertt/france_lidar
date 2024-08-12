@@ -7,7 +7,10 @@ if [ ! -d "$output_dir" ]; then
     mkdir "$output_dir"
 fi
 
-# empty the output directory on windows
+# remove france_lidar_tiles.fgb if exists
+rm -f ${output_dir}/france_lidar_tiles.fgb
+
+# empty the output directory
 rm -f ${output_dir}/*
 
 base_url="https://data.geopf.fr/private/wfs/?service=WFS&version=2.0.0&apikey=interface_catalogue&request=GetFeature&typeNames=IGNF_LIDAR-HD_TA:nuage-dalle&outputFormat=application/json&count=5000&startIndex="
@@ -36,7 +39,7 @@ echo "All pages saved in ${output_dir}/${geojson_file}"
 # convert to flatgeobuf format
 echo "Converting to FlatGeobuf format..."
 fgb_file="france_lidar_tiles.fgb"
-ogr2ogr -f "FlatGeobuf" "${fgb_file}" "${output_dir}/${geojson_file}"
+ogr2ogr -f "FlatGeobuf" -select url "${fgb_file}" "${output_dir}/${geojson_file}"
 
 # remove output directory
 rm -rf ${output_dir}/*

@@ -25,7 +25,7 @@ Result script: france_lidar_tiles.fgb
 
 Online url:
 
-https://flatgeobuf.blob.core.windows.net/fgb/france_lidar_tiles.fgb
+https://bertt.github.io/france_lidar_catalog/france_lidar_tiles.fgb
 
 To run:
 

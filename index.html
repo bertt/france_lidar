@@ -73,7 +73,7 @@
           },
         });
         map.on("click", "footprints", (e) => {
-            let href = e.features[0].properties.url;
+            let href =e.features[0].properties.url;
             let el = document.getElementById("iframe");
             el.src = `https://diffusion-lidarhd.ign.fr/visionneuse?copc=${href}`;
         });
@@ -82,7 +82,7 @@
             });
       });
 
-      var tiles_gdb = "https://flatgeobuf.blob.core.windows.net/fgb/france_lidar_tiles.fgb";
+      var tiles_gdb = "https://bertt.github.io/france_lidar_catalog/france_lidar_tiles.fgb";
       // for local use: var tiles_gdb = "france_lidar_tiles.fgb";
 
       async function RefreshTiles(){
