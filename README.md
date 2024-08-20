@@ -44,7 +44,7 @@ ogrinfo /vsicurl/https://bertt.github.io/france_lidar_catalog/france_lidar_tiles
 
 Viewer index.html has two parts:
 
-- Left: MapBox footprint viewer
+- Left: MapLibre footprint viewer
 
 Gets and draws footprints from france_lidar_tiles.fgb
 

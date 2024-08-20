@@ -8,11 +8,8 @@
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css"
-      rel="stylesheet"
-    />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
+    <script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
     <script src="https://unpkg.com/flatgeobuf@3.32.0/dist/flatgeobuf-geojson.min.js"></script>
     <style>
       body {
@@ -42,17 +39,16 @@
       id="iframe"
     ></iframe>
     <script>
-      mapboxgl.accessToken = "pk.eyJ1IjoiYmVydHQiLCJhIjoiY2x6enp3Ymx2MWV2MTJpc2ZmY21scWc0YiJ9.ei0UrWitqU0SJYHS2EykEg";
-      const map = new mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/mapbox/satellite-streets-v11",
-        zoom: 14,
+      var map = new maplibregl.Map({
+        container: 'map',
+        style: 'https://api.maptiler.com/maps/streets-v2/style.json?key=NEeAOMvTyhTAwYbN30uo',
+        center: [-74.5, 40], 
         center: [1.282928,44.110523],
-        projection: "globe",
+        zoom: 14 
       });
 
+
       map.on("load", async () => {
-        map.setFog({});
         map.addSource("footprints", {
           type: "geojson",
           data: {
