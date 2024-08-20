@@ -48,63 +48,58 @@
 <script>
     var tiles_gdb = "https://bertt.github.io/france_lidar_catalog/france_lidar_tiles.fgb";
 
-        document.addEventListener("DOMContentLoaded", async () => { 
+    document.addEventListener("DOMContentLoaded", async () => { 
 
-	const map = L.map('map').setView([47.122476,2.570801], 6);
+        const map = L.map('map').setView([47.122476,2.570801], 6);
 
-	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		maxZoom: 19,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	}).addTo(map);
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
 
-    var geojsonLayer = new L.GeoJSON.AJAX("bluetiles_4326.geojson");       
-    geojsonLayer.addTo(map);
+        var geojsonLayer = new L.GeoJSON.AJAX("bluetiles_4326.geojson");       
+        geojsonLayer.addTo(map);
 
 
-    function fgBoundingBox(latlng) {
-        var delta=0.0001;
-        return {
-            minX: latlng.lng - delta,
-            minY: latlng.lat - delta,
-            maxX: latlng.lng + delta,
-            maxY: latlng.lat + delta,
-        };
-    }
+        function fgBoundingBox(latlng) {
+            var delta=0.0001;
+            return {
+                minX: latlng.lng - delta,
+                minY: latlng.lat - delta,
+                maxX: latlng.lng + delta,
+                maxY: latlng.lat + delta,
+            };
+        }
 
-	async function onMapClick(e) {
-        handled = false;
-        console.debug("hallo click");
-        var bbox = fgBoundingBox(e.latlng);
-        // alert("You clicked the map at " + e.latlng);
-        
-        for await (let feature of flatgeobuf.deserialize(tiles_gdb, bbox)) {
-            console.debug("hallo: " + feature.properties.url);
-            if(!handled) {
+        async function onMapClick(e) {
+            handled = false;
+            console.debug("hallo click");
+            var bbox = fgBoundingBox(e.latlng);
+            // alert("You clicked the map at " + e.latlng);
+            
+            for await (let feature of flatgeobuf.deserialize(tiles_gdb, bbox)) {
+                console.debug("hallo: " + feature.properties.url);
+                if(!handled) {
 
-                // draw the feature in red color
-                L.geoJSON(feature, { 
-                    style: { 
-                        color: 'red', 
-                        weight: 2, 
-                        fillOpacity: 0.2,
-                    } 
-                }).addTo(map);
+                    // draw the feature in red color
+                    L.geoJSON(feature, { 
+                        style: { 
+                            color: 'red', 
+                            weight: 2, 
+                            fillOpacity: 0.2,
+                        } 
+                    }).addTo(map);
 
-                handled = true;
-                let el = document.getElementById("iframe");
-                el.src = `https://diffusion-lidarhd.ign.fr/visionneuse?copc=${feature.properties.url}`;
-                //console.debug("hallo");
-                // console.debug(feature.properties.url);
+                    handled = true;
+                    let el = document.getElementById("iframe");
+                    el.src = `https://diffusion-lidarhd.ign.fr/visionneuse?copc=${feature.properties.url}`;
+                }
             }
         }
-	}
-    // let results = L.layerGroup().addTo(map);
-	map.on('click', onMapClick);
-
+        map.on('click', onMapClick);
+    });
 
 </script>
-
-
 
 </body>
 </html>
