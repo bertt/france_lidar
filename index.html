@@ -78,22 +78,19 @@
             // alert("You clicked the map at " + e.latlng);
             
             for await (let feature of flatgeobuf.deserialize(tiles_gdb, bbox)) {
-                console.debug("hallo: " + feature.properties.url);
-                if(!handled) {
+                // draw the feature in red color
+                L.geoJSON(feature, { 
+                    style: { 
+                        color: 'red', 
+                        weight: 2, 
+                        fillOpacity: 0.2,
+                    } 
+                }).addTo(map);
 
-                    // draw the feature in red color
-                    L.geoJSON(feature, { 
-                        style: { 
-                            color: 'red', 
-                            weight: 2, 
-                            fillOpacity: 0.2,
-                        } 
-                    }).addTo(map);
-
-                    handled = true;
-                    let el = document.getElementById("iframe");
-                    el.src = `https://corsproxy.io/?https://diffusion-lidarhd.ign.fr/visionneuse?copc=${feature.properties.url}`;
-                }
+                handled = true;
+                let href =feature.properties.url;
+                let el = document.getElementById("iframe");
+                el.src = `https://diffusion-lidarhd.ign.fr/visionneuse?copc=${href}`;
             }
         }
         map.on('click', onMapClick);
