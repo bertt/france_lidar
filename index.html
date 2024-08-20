@@ -5,7 +5,7 @@
 	<base target="_top">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<title>Quick Start - Leaflet</title>
 	
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
@@ -72,10 +72,8 @@
         }
 
         async function onMapClick(e) {
-            handled = false;
             console.debug("hallo click");
             var bbox = fgBoundingBox(e.latlng);
-            // alert("You clicked the map at " + e.latlng);
             
             for await (let feature of flatgeobuf.deserialize(tiles_gdb, bbox)) {
                 // draw the feature in red color
@@ -87,7 +85,6 @@
                     } 
                 }).addTo(map);
 
-                handled = true;
                 let href =feature.properties.url;
                 let el = document.getElementById("iframe");
                 el.src = `https://diffusion-lidarhd.ign.fr/visionneuse?copc=${href}`;
