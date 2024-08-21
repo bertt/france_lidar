@@ -2,9 +2,21 @@
 
 Processing script and basic viewer for France LIDAR copc files
 
-## Script
+Live demo see: https://bertt.github.io/france_lidar/
 
-Script does the following actions:
+## Process big footprints
+
+The big footprints are the areas containing COPC files. They are copied from a WFS and converted to GeoJSON (file bluetiles_4326.geojson)
+
+To get them:
+
+```
+$ wget -O bluetiles_4326.geojson "https://data.geopf.fr/private/wfs/?service=WFS&version=2.0.0&apikey=interface_catalogue&request=GetFeature&typeNames=IGNF_LIDAR-HD_TA:nuage-bloc&outputFormat=application/json&SRSNAME=EPSG:4326"
+```
+
+## Process small footprints
+
+Script 'process_footprints.sh' does the following actions:
 
 - Download geojson footprints per page (5000 footprints) from WFS;
 
@@ -44,12 +56,14 @@ ogrinfo /vsicurl/https://bertt.github.io/france_lidar_catalog/france_lidar_tiles
 
 Viewer index.html has two parts:
 
-- Left: MapLibre footprint viewer
+- Left: Leaflet big footprints viewer
 
-Gets and draws footprints from france_lidar_tiles.fgb
+Gets and draws footprints from bluetiles_4326.geojson
 
-Onclick on a footprint, the COPC viewer with the corresponding url is filled 
+Onclick on a footprint, the flatgeobuf file is requested (with parameters click location) to get the polygon and url of the COPC 
+
+The small footprint is drawn in red
+
+the COPC viewer with the corresponding url is filled 
 
 - Right: COPC Viewer
-
-Live demo see: https://bertt.github.io/france_lidar/
